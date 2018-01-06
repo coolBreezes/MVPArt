@@ -30,6 +30,7 @@ import butterknife.OnClick;
  * Created by QING on 2018/1/6.
  * <p>
  * v1.0 以打开摄像机为例
+ *  refer https://juejin.im/entry/5834e93ac59e0d00576a706b
  */
 
 public class PermissionActivity extends BaseActivity {
