@@ -28,4 +28,25 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:26.+'
     testCompile 'junit:junit:4.12'
+
+    /**
+     * view
+     */
+    //butterknife
+    compile(rootProject.ext.dependencies["butterknife"]) {
+        exclude module: 'support-annotations'
+    }
+    annotationProcessor(rootProject.ext.dependencies["butterknife-compiler"]) {
+        exclude module: 'support-annotations'
+        exclude module: 'butterknife-annotations'
+    }
+    //titlebar
+    compile 'com.wuhenzhizao:titlebar:1.0.6'
+
+    /**
+     *  tools
+     */
+
+    //EventBus
+    compile 'org.greenrobot:eventbus:3.0.0'
 }

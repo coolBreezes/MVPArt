@@ -1,12 +1,13 @@
-package com.qing.mvpart.demo;
+package com.qing.codeart.demo;
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.qing.mvpart.R;
+import com.qing.codeart.R;
+
 
 /**
  * A placeholder fragment containing a simple view.
