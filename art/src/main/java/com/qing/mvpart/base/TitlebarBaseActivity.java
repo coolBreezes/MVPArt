@@ -17,7 +17,7 @@
 // * Created by QING on 2017/12/22.
 // * todo think 放在哪里 这个类
 // */
-//public abstract class TitlebarBaseActivity<P extends IPresenter> extends BaseActivity<P> {
+//public abstract class TitlebarBaseActivity<P extends IPresenter> extends XActivity<P> {
 //
 //    @BindView(R.id.publico_titlebar)
 //    public CommonTitleBar mTitlebar;

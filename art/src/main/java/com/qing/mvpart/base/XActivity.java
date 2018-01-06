@@ -18,8 +18,10 @@ import butterknife.Unbinder;
 /**
  * Activity 基类
  * Created by QING on 2017/12/13.
+ *
+ * todo think 叫 BaseActivity呢
  */
-public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivity implements IActivity<P> {
+public abstract class XActivity<P extends IPresenter> extends AppCompatActivity implements IActivity<P> {
 
     protected final String TAG = this.getClass().getSimpleName();
 

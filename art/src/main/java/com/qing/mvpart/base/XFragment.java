@@ -19,7 +19,7 @@ import butterknife.Unbinder;
  * Fragment 基类
  * Created by QING on 2017/12/13.
  */
-public abstract class BaseFragment<P extends IPresenter> extends Fragment implements IFragment<P> {
+public abstract class XFragment<P extends IPresenter> extends Fragment implements IFragment<P> {
 
     protected final String TAG = this.getClass().getSimpleName();
 
