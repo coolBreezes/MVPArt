@@ -29,7 +29,7 @@ import butterknife.OnClick;
  * 6.0 运行时权限
  * Created by QING on 2018/1/6.
  * <p>
- * v1.0 以网络访问为例
+ * v1.0 以打开摄像机为例
  */
 
 public class PermissionActivity extends BaseActivity {
@@ -40,7 +40,7 @@ public class PermissionActivity extends BaseActivity {
     @BindView(R.id.bt_camera)
     Button btCamera;
 
-    String path = "https://reg.163.com/logins.jsp?id=helloworld&pwd=android";
+//    String path = "https://reg.163.com/logins.jsp?id=helloworld&pwd=android";
 
     @Override
     public int getLayoutId() {
@@ -71,16 +71,10 @@ public class PermissionActivity extends BaseActivity {
     @OnClick(R.id.bt_camera)
     public void onClick() {
 
-        //1.声明权限 （targetSdk 要为23或以上）
-        //2.检查是否有权限 （因为考虑使用第三方jar包，就不封装工具类了）
         /**
          * 1.声明权限 （targetSdk 要为23或以上）
+         *   忘了声明权限
          */
-
-
-
-        //这样，先访问网络。。打开百度？
-        //发送请求
         //网络访问不是危险权限
 
         //test1
@@ -107,25 +101,32 @@ public class PermissionActivity extends BaseActivity {
     }
 
     /**
-     *  3.申请使用权限
+     * 3.申请使用权限
+     *
      * @param permission
      * @param requestCode
      */
-    public void requestPermission(String permission,int requestCode){
+    public void requestPermission(String permission, int requestCode) {
 
-        if (isGranted(permission)){
-            // TODO: 2018/1/6 执行相应操作
-        }else {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(mContext,permission)){
-                // TODO: 2018/1/6 这里做什么？
-            }else {
-                ActivityCompat.requestPermissions(mContext,new String[]{permission},requestCode);
+        if (isGranted(permission)) {
+            Log.d("TAG", "requestPermission 获取到权限");
+            ToastUtil.showS("已获取到权限");
+//            String jpgPath = getCacheDir() + "test.jpg";
+//            takePhotoByPath(jpgPath, 2);
+        } else {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(mContext, permission)) {
+                //test2 小米6s,禁止权限后，没有弹出相关提示，只能自己设置
+                Log.d("TAG", "shouldShowRequestPermissionRationale ");
+                ToastUtil.showS("您没有授权访问摄像机的权限，请在设置中打开授权");
+            } else {
+                ActivityCompat.requestPermissions(mContext, new String[]{permission}, requestCode);
             }
         }
     }
 
     /**
-     *  4.处理授权回调
+     * 4.处理授权回调
+     *
      * @param requestCode
      * @param permissions
      * @param grantResults
@@ -133,15 +134,17 @@ public class PermissionActivity extends BaseActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
-        if (requestCode == CAMERA){
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
-//                requestByGet(path);
-                String jpgPath = getCacheDir() + "test.jpg";
-                takePhotoByPath(jpgPath, 2);
-            }else {
-                ToastUtil.showS("您没有授权访问网络的权限，请在设置中打开授权");
+        if (requestCode == CAMERA) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Log.d("TAG", "onRequestPermissionsResult 获取到权限");
+                ToastUtil.showS("获取到权限");
+                // TODO: 2018/1/6 读写sd卡权限？
+//                String jpgPath = getCacheDir() + "test.jpg";
+//                takePhotoByPath(jpgPath, 2);
+            } else {
+                ToastUtil.showS("您没有授权访问摄像机的权限，请在设置中打开授权");
             }
-            //// TODO: 2018/1/6  think 为什么这么写
+            // TODO: 2018/1/6  think 为什么这么写
             return;
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -150,6 +153,7 @@ public class PermissionActivity extends BaseActivity {
     /**
      * 5 Get 方式发起网络请求
      * ref : http://blog.csdn.net/zuolongsnail/article/details/6373051
+     *
      * @param path
      */
     public void requestByGet(String path) {

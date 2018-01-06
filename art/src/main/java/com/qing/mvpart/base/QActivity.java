@@ -21,7 +21,7 @@ import butterknife.Unbinder;
  *
  * todo think 叫 BaseActivity呢
  */
-public abstract class XActivity<P extends IPresenter> extends AppCompatActivity implements IActivity<P> {
+public abstract class QActivity<P extends IPresenter> extends AppCompatActivity implements IActivity<P> {
 
     protected final String TAG = this.getClass().getSimpleName();
 

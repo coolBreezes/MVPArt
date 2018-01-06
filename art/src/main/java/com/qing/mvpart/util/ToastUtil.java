@@ -16,6 +16,9 @@ import com.qing.mvpart.App;
  * -- 1.防止内容重复弹出
  * 2.todo debug 模式
  * 3.resId 情况 2017-12-26 16:07:50
+ *
+ * todo think 这样写也可以
+ * 前提 项目要的Application要依赖App，否则会空指针报错
  */
 public class ToastUtil {
 
