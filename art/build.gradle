@@ -1,18 +1,24 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+    useLibrary 'org.apache.http.legacy'
+
+//    compileOptions {
+//        targetCompatibility JavaVersion.VERSION_1_8
+//        sourceCompatibility JavaVersion.VERSION_1_8
+//    }
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
-        versionCode 1
-        versionName "1.0"
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -21,13 +27,31 @@ android {
     }
 }
 
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile 'com.android.support:appcompat-v7:26.+'
-    testCompile 'junit:junit:4.12'
+
+    /**
+     * support
+     */
+    compile(rootProject.ext.dependencies["support-v4"]) {
+        exclude module: 'support-annotations'
+    }
+    compile(rootProject.ext.dependencies["appcompat-v7"]) {
+        exclude module: 'support-annotations'
+        exclude module: 'support-v4'
+    }
+    compile(rootProject.ext.dependencies["design"]) {
+        exclude module: 'support-annotations'
+        exclude module: 'appcompat-v7'
+        exclude module: 'support-v4'
+    }
+    compile rootProject.ext.dependencies["annotations"]
 
     /**
      *  network
@@ -55,6 +79,23 @@ dependencies {
     annotationProcessor(rootProject.ext.dependencies["glide-compiler"]) {
         exclude module: 'jsr305'
     }
+
+    /**
+     * view
+     */
+    //butterknife
+    compile(rootProject.ext.dependencies["butterknife"]) {
+        exclude module: 'support-annotations'
+    }
+    annotationProcessor(rootProject.ext.dependencies["butterknife-compiler"]) {
+        exclude module: 'support-annotations'
+        exclude module: 'butterknife-annotations'
+    }
+    //titlebar
+    compile rootProject.ext.dependencies["titlebar"]
+    //material-dialog
+    compile rootProject.ext.dependencies["material-dialog-core"]
+    compile rootProject.ext.dependencies["material-dialog-common"]
 
     /**
      *  rx
@@ -86,38 +127,16 @@ dependencies {
     }
     compile rootProject.ext.dependencies['rxerrorhandler2']
 
-
-
-    /**
-     * view
-     */
-    //butterknife
-    compile(rootProject.ext.dependencies["butterknife"]) {
-        exclude module: 'support-annotations'
-    }
-    annotationProcessor(rootProject.ext.dependencies["butterknife-compiler"]) {
-        exclude module: 'support-annotations'
-        exclude module: 'butterknife-annotations'
-    }
-    //titlebar
-    compile 'com.wuhenzhizao:titlebar:1.0.6'
-    //autolayout
-    compile(rootProject.ext.dependencies["autolayout"]) {
-        exclude group: 'com.android.support'
-    }
-
     /**
      *  tools
      */
-
     //EventBus
-    compile 'org.greenrobot:eventbus:3.0.0'
-    //tools
-    provided rootProject.ext.dependencies["javax.annotation"]
-    compile rootProject.ext.dependencies["dagger2"]
-    annotationProcessor(rootProject.ext.dependencies["dagger2-compiler"]) {
-        exclude module: 'dagger'
-    }
-    //compile rootProject.ext.dependencies["androideventbus"]
+    compile rootProject.ext.dependencies["eventBus"]
+    //provided rootProject.ext.dependencies["javax.annotation"]
 //    compile rootProject.ext.dependencies["gson"]
+
+    /**
+     *  test
+     */
+    testCompile rootProject.ext.dependencies["junit"]
 }

@@ -14,17 +14,17 @@ public abstract class BasePresenter<M extends IModel, V extends IView> implement
     /**
      * 如果当前页面同时需要 Model 层和 View 层,则使用此构造函数(默认)
      */
-    public BasePresenter(M model, V view) {
+    public BasePresenter(M model, V rootView) {
         this.mModel = model;
-        this.mView = view;
+        this.mView = rootView;
         onStart();
     }
 
     /**
      * 如果当前页面不需要操作数据,只需要 View 层,则使用此构造函数
      */
-    public BasePresenter(V view) {
-        this.mView = view;
+    public BasePresenter(V rootView) {
+        this.mView = rootView;
         onStart();
     }
 

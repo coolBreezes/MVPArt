@@ -22,6 +22,8 @@ import io.reactivex.functions.Consumer;
  * Created by QING on 2018/1/6.
  * <p>
  * v1.0 以打开摄像机为例
+ * <p>
+ * refer http://blog.csdn.net/joedan0104/article/details/78713433
  */
 
 public class RxPermissionActivity extends BaseActivity {
@@ -32,7 +34,7 @@ public class RxPermissionActivity extends BaseActivity {
     @BindView(R.id.bt_camera)
     Button btCamera;
 
-    RxPermissions rxPermissions ;
+    RxPermissions rxPermissions;
 
 //    String path = "https://reg.163.com/logins.jsp?id=helloworld&pwd=android";
 
@@ -67,7 +69,7 @@ public class RxPermissionActivity extends BaseActivity {
     public void onClick() {
 
         //rx1 -> 2  Action1 -> Consumer
-        rxPermissions.requestEach(Manifest.permission.CAMERA)
+        rxPermissions.requestEach(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .subscribe(new Consumer<Permission>() {
                     @Override
                     public void accept(Permission permission) throws Exception {
@@ -95,7 +97,6 @@ public class RxPermissionActivity extends BaseActivity {
                         }
                     }
                 });
-
     }
 
 
