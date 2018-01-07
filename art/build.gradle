@@ -91,8 +91,6 @@ dependencies {
         exclude module: 'support-annotations'
         exclude module: 'butterknife-annotations'
     }
-    //titlebar
-    compile rootProject.ext.dependencies["titlebar"]
     //material-dialog
     compile rootProject.ext.dependencies["material-dialog-core"]
     compile rootProject.ext.dependencies["material-dialog-common"]
@@ -134,6 +132,7 @@ dependencies {
     compile rootProject.ext.dependencies["eventBus"]
     //provided rootProject.ext.dependencies["javax.annotation"]
 //    compile rootProject.ext.dependencies["gson"]
+    compile rootProject.ext.dependencies["logger"]
 
     /**
      *  test

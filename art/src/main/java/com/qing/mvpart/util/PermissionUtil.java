@@ -3,6 +3,7 @@ package com.qing.mvpart.util;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -28,8 +29,8 @@ import io.reactivex.functions.Consumer;
  */
 public class PermissionUtil {
 
-    public static final String TAG = "Permission";
-    public static final int REQUEST_CODE_SETTING = 0x01;
+    private static final String TAG = "Permission";
+//    public static final int REQUEST_CODE_SETTING = 0x01;
 
 
     private PermissionUtil() {
@@ -95,7 +96,6 @@ public class PermissionUtil {
                         }
                     });
         }
-
     }
 
 
@@ -141,8 +141,6 @@ public class PermissionUtil {
 
     /**
      * 显示设置权限对话框
-     *
-     * @param activity
      */
     public static void showSettingDialog(final Activity activity) {
 
@@ -151,7 +149,7 @@ public class PermissionUtil {
                 .title(R.string.permission_title_permission_failed)
                 .content(R.string.permission_message_permission_failed)
                 .positiveText(R.string.permission_setting)
-                .negativeText(R.string.permission_cancel)
+                .positiveColor(Color.parseColor("#3FA862"))
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -159,6 +157,8 @@ public class PermissionUtil {
                         dialog.dismiss();
                     }
                 })
+                .negativeText(R.string.permission_cancel)
+                .negativeColor(Color.parseColor("#4a4a4a"))
                 .onNegative(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -180,7 +180,8 @@ public class PermissionUtil {
         intent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
         intent.setData(Uri.fromParts("package",
                 activity.getApplication().getPackageName(), null));
-        activity.startActivityForResult(intent, REQUEST_CODE_SETTING);
+//        activity.startActivityForResult(intent, REQUEST_CODE_SETTING);
+        activity.startActivity(intent);
     }
 
 }

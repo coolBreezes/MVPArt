@@ -5,7 +5,7 @@ import android.support.compat.BuildConfig;
 import android.text.TextUtils;
 import android.widget.Toast;
 
-import com.qing.mvpart.App;
+import com.qing.mvpart.BaseApp;
 
 
 /**
@@ -17,8 +17,7 @@ import com.qing.mvpart.App;
  * 2.todo debug 模式
  * 3.resId 情况 2017-12-26 16:07:50
  *
- * todo think 这样写也可以
- * 前提 项目要的Application要依赖App，否则会空指针报错
+ * 前提 项目的Application要继承BaseApp，否则会空指针报错
  */
 public class ToastUtil {
 
@@ -30,11 +29,11 @@ public class ToastUtil {
      */
 
     public static void showS(CharSequence msg) {
-        showS(App.getInstance(), msg);
+        showS(BaseApp.getInstance(), msg);
     }
 
     public static void showS(int resId) {
-        showS(App.getInstance(), resId);
+        showS(BaseApp.getInstance(), resId);
     }
 
     /**
@@ -49,11 +48,11 @@ public class ToastUtil {
     }
 
     public static void showL(CharSequence msg) {
-        showL(App.getInstance(), msg);
+        showL(BaseApp.getInstance(), msg);
     }
 
     public static void showL(int resId) {
-        showL(App.getInstance(), resId);
+        showL(BaseApp.getInstance(), resId);
     }
 
     /**

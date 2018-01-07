@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Base64;
 
-import com.qing.mvpart.App;
+import com.qing.mvpart.BaseApp;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -46,7 +46,7 @@ public class SpUtil {
     }
 
     public static SpUtil getInstance() {
-        return getInstance(App.getInstance());
+        return getInstance(BaseApp.getInstance());
     }
 
     public static SpUtil getInstance(Context context) {

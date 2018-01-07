@@ -2,8 +2,10 @@ package com.qing.codeart.ability.permission;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 
+import com.orhanobut.logger.Logger;
 import com.qing.codeart.R;
 import com.qing.codeart.publico.base.BaseActivity;
 import com.qing.mvpart.util.ToastUtil;
@@ -58,12 +60,21 @@ public class PermissionUtilActivity extends BaseActivity<PermissionContract.Pres
     @Override
     public void processLogic() {
 
+        Logger.d("test");
+        Logger.e("test");
+        Logger.i("test");
+        Logger.d("test");
     }
 
 
     @OnClick(R.id.bt_camera)
     public void onClick() {
 
+        Log.d(TAG,"HELLO");
+        Logger.d("test");
+        Logger.e("test");
+        Logger.i("test");
+        Logger.d("test");
         getP().requestPersission();
     }
 

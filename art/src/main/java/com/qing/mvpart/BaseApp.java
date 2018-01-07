@@ -4,19 +4,25 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
 
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 自定义 Application
+ *  Application 基类
+ * 实现业务无关的API
  * Created by QING on 2017/12/13.
+ *  v1.0
+ *  init Logger
  */
-public class App extends Application {
+public class BaseApp extends Application {
 
     /**
      * 应用实例
      **/
-    private static App instance;
+    private static BaseApp instance;
     /**
      * 记录当前栈里所有activity
      */
@@ -32,14 +38,14 @@ public class App extends Application {
         super.onCreate();
         instance = this;
 
-        //sdk 初始化
-        initPlayerSdk();
+        //init Logger
+        Logger.addLogAdapter(new AndroidLogAdapter());
     }
 
     /**
      * 获得实例
      */
-    public static App getInstance() {
+    public static BaseApp getInstance() {
         return instance;
     }
 
@@ -119,20 +125,6 @@ public class App extends Application {
         Intent intent = instance.getPackageManager().getLaunchIntentForPackage(instance.getPackageName());
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         instance.startActivity(intent);
-    }
-
-
-    private void initPlayerSdk() {
-
-//        if (SdCardUtil.isAvailable()) {
-//            String imgDir = SdCardUtil.getSdCardPath() + getString(R.string.app_name) +
-//                    File.separator + "image" + File.separator;
-//            String videoDir = SdCardUtil.getSdCardPath() + getString(R.string.app_name) +
-//                    File.separator + "video" + File.separator;
-//            PlayerCore.setAlbumPath(imgDir);
-//            PlayerCore.setVideoPath(videoDir);
-//        }
-//        QvJniApi.init();
     }
 
 }

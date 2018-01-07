@@ -17,6 +17,7 @@ import butterknife.Unbinder;
 
 /**
  * Fragment 基类
+ * 封装业务无关的API
  * Created by QING on 2017/12/13.
  */
 public abstract class QFragment<P extends IPresenter> extends Fragment implements IFragment<P> {

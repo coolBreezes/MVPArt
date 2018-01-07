@@ -32,6 +32,8 @@ public class PermissionPresenter extends BasePresenter<PermissionContract.Model,
             @Override
             public void onRequestPermissionFailure(List<String> permissions) {
                 getV().showMessage("Request permissions failure");
+                // : 2018/1/7 弹窗引导用户去授权
+                PermissionUtil.showSettingDialog(getV().getActivity());
             }
 
             @Override

@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 
-import com.qing.mvpart.App;
+import com.qing.mvpart.BaseApp;
 import com.qing.mvpart.mvp.IPresenter;
 
 import org.greenrobot.eventbus.EventBus;
@@ -17,12 +17,12 @@ import butterknife.Unbinder;
 
 /**
  * Activity 基类
+ * 封装业务无关的API
  * Created by QING on 2017/12/13.
- *
- * todo think 叫 BaseActivity呢
  */
 public abstract class QActivity<P extends IPresenter> extends AppCompatActivity implements IActivity<P> {
 
+    public static final String BASE_INTENT = "BASE_INTENT";
     protected final String TAG = this.getClass().getSimpleName();
 
     private P mPresenter;
@@ -34,7 +34,7 @@ public abstract class QActivity<P extends IPresenter> extends AppCompatActivity 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = this;
-        App.addActivity(this);
+        BaseApp.addActivity(this);
 
         if (getLayoutId() > 0) {
             setContentView(getLayoutId());
@@ -73,14 +73,17 @@ public abstract class QActivity<P extends IPresenter> extends AppCompatActivity 
             mUnbinder = null;
         }
         mContext = null;
-        App.removeActivity(this);
+        BaseApp.removeActivity(this);
     }
 
     protected P getP() {
         return mPresenter;
     }
 
-    ///////////////////////  UI相关   ///////////////////////////
+
+    /***************************************************
+     *    UI相关
+     ****************************************************/
 
     /**
      * 添加fragment，静态使用
@@ -118,25 +121,26 @@ public abstract class QActivity<P extends IPresenter> extends AppCompatActivity 
         startActivity(clazz, bundle, false);
     }
 
-    public void startActivity(Class<? extends Activity> clazz, Bundle bundle, boolean finish) {
+    public void startActivity(Class<? extends Activity> clazz, Bundle bundle, boolean isFinish) {
         Intent intent = new Intent();
         intent.setClass(mContext, clazz);
         if (bundle != null) {
-            intent.putExtra("BASE_INTENT", bundle);
+            intent.putExtra(BASE_INTENT, bundle);
         }
         startActivity(intent);
-        if (finish) {
+        if (isFinish) {
             finish();
         }
     }
 
-    /*
-        返回键返回事件的处理
-        如果FragmentStack中只有1个fragment 关闭当前activity
-        如果FragmentStack中还有>1数量fragment则可以removeFragment()将fragment出栈 此部分交给子类实现
-     */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        /*
+            返回键返回事件的处理
+            如果FragmentStack中只有1个fragment 关闭当前activity
+            如果FragmentStack中还有>1数量fragment则可以removeFragment()将fragment出栈 此部分交给子类实现
+        */
         if (KeyEvent.KEYCODE_BACK == keyCode) {
             if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
                 finish();

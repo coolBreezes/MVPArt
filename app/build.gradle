@@ -64,6 +64,8 @@ dependencies {
         exclude module: 'support-annotations'
         exclude module: 'butterknife-annotations'
     }
+    //titlebar
+    compile rootProject.ext.dependencies["titlebar"]
 
     /**
      *  test
