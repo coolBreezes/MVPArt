@@ -1,4 +1,4 @@
-package com.qing.mvpart.util;
+package com.qing.codeart.publico.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;

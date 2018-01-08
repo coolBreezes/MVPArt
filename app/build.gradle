@@ -71,4 +71,7 @@ dependencies {
      *  test
      */
     testCompile rootProject.ext.dependencies["junit"]
+    androidTestCompile(rootProject.ext.dependencies["espresso-core"], {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
 }
